@@ -140,7 +140,7 @@ li.item:hover a{
 }
 
 .button__text{
-
+    font-size: 1.2rem;
 }
 .button__icon{
     font-size: 1.4rem;
@@ -180,6 +180,10 @@ li.item:hover a{
 
 ul.list > li.item a:visited{
     color: var(--yellow_metal);
+}
+
+ul.list:hover > li.item a:visited{
+    color: var(--ore);
 }
 
 .item:last-child{
