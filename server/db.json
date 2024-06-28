@@ -1,0 +1,89 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "nombre": "Kevin",
+      "apellido": "plata",
+      "documento": 1095915027,
+      "tipo_doc": "tarjeta",
+      "correo": "",
+      "direccion": ""
+    },
+    {
+      "id": "1a08",
+      "nombre": "Kevin",
+      "apellido": "Plata",
+      "documento": "1095915027",
+      "tipo_doc": "Tarjeta de identidad",
+      "correo": "ksantiago@gmai.com",
+      "direccion": "caneyes"
+    },
+    {
+      "id": "9f78",
+      "nombre": "Santiago",
+      "apellido": "Villalobos",
+      "documento": "10959150247",
+      "tipo_doc": "Cedula de Ciudadania",
+      "correo": "kevinsplata@gmai.com",
+      "direccion": "casa"
+    },
+    {
+      "id": "94de",
+      "nombre": "Maria",
+      "apellido": "Ozorio",
+      "documento": "456832437",
+      "tipo_doc": "Tarjeta de identidad",
+      "correo": "mariamete@soy.hola.co",
+      "direccion": "otra casa"
+    },
+    {
+      "id": "f9d7",
+      "nombre": "Jaime",
+      "apellido": "Rodriguez",
+      "documento": "1095924054",
+      "tipo_doc": "Pasaporte",
+      "correo": "elr-odriguez@hotmail.com",
+      "direccion": "eeuu"
+    },
+    {
+      "id": "3db2",
+      "nombre": "adsdsa",
+      "apellido": "dasdsad",
+      "documento": "47987987",
+      "tipo_doc": "Tarjeta de identidad",
+      "correo": "asdasdasd@gas.co",
+      "direccion": "asdasdasdsad"
+    },
+    {
+      "id": "0ae6",
+      "nombre": "asdasd",
+      "apellido": "asdasds",
+      "documento": "4654654",
+      "tipo_doc": "Pasaporte",
+      "correo": "laskdjlas@g.co",
+      "direccion": "asd"
+    }
+  ],
+  "documentos": [
+    {
+      "id": 1,
+      "nombre": "Cedula de Ciudadania"
+    },
+    {
+      "id": 2,
+      "nombre": "Tarjeta de identidad"
+    },
+    {
+      "id": 3,
+      "nombre": "Pasaporte"
+    },
+    {
+      "id": 4,
+      "nombre": "Extrangeria"
+    },
+    {
+      "id": 5,
+      "nombre": "otro"
+    }
+  ]
+}

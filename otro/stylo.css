@@ -102,7 +102,7 @@ li.item:hover a{
 .cards{
     display: grid;
     grid-template-columns: repeat(3, minmax(150px, 1fr));
-    gap: 10px;
+    gap: 20px;
 }
 
 .card{
