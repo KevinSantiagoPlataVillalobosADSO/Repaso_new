@@ -1,3 +1,25 @@
+import { leer } from './MODULO/leer.js'
+import letras from './MODULO/strings.js'
+import num from './MODULO/number.js'
+import ema_il from './MODULO/email.js'
+import seleccion from './MODULO/seleccion.js'
+import direc from './MODULO/direc.js'
+import vacio from './MODULO/validar.js'
+
+let btn = document.querySelector(".btn")
+let form = document.querySelector("form")
+let nombre = document.querySelector(".name")
+let last = document.querySelector(".lastname")
+let doc = document.querySelector(".doc")
+let mail = document.querySelector(".email")
+let tipo_d = document.querySelector(".select_doc")
+let direccion = document.querySelector(".direc")
+let check = document.querySelector(".check")
+let inputs = document.querySelectorAll("input")
+let select = document.querySelector("select")
+
+leer()
+
 async function option(){
     let response = await fetch("http://localhost:3000/documentos")
     let data = await response.json();
@@ -11,136 +33,145 @@ async function option(){
     });
     select.appendChild(fragment)
 }
-option();
 
-
-
-//regex
-    let letras_r = /^[a-zA-Z]{3,}$/
-    let numeros = /^[0-9]{5,}$/
-    //regex del email https://w3.unpocodetodo.info/utiles/regex-ejemplos.php?type=email
-    let email = /^[^@]+@[^@]+\.[a-zA-Z]{2,}$/
-//
-let btn = document.querySelector(".btn")
-let form = document.querySelector("form")
-let nombre = document.querySelector(".name")
-let last = document.querySelector(".lastname")
-let doc = document.querySelector(".doc")
-let mail = document.querySelector(".email")
-let tipo_d = document.querySelector(".select_doc")
-let direccion = document.querySelector(".direc")
-
-if(nombre.value == "" && last.value == "" && doc.value == "" && mail.value == ""){
+if(check.checked){
+    btn.classList.add("btn")
+    btn.classList.remove("disabled")
+}
+else{
+    btn.classList.add("disabled")
+    btn.classList.remove("btn")
     btn.setAttribute("disabled", "true")
 }
+option();
 
+nombre.addEventListener('keyup', (event) => {
+    letras(event, nombre)
+})
 
+nombre.addEventListener('keypress', (event) => {
+    letras(event, nombre)
+})
+nombre.addEventListener('blur', (event) => {
+    letras(event, nombre)
+})
 
-form.addEventListener('keyup', function () {
-    if(letras_r.test(nombre.value)){
-        btn.removeAttribute("disabled"); 
-        nombre.classList.remove("no_send")
-        nombre.classList.add("sucess")
-    }
+last.addEventListener('keyup', (event) => {
+    letras(event, last)
+})
 
-    else if(nombre.value == ""){
-        btn.setAttribute("disabled", "true")
-        nombre.classList.remove("no_send")
-        nombre.classList.remove("sucess")
-    }
+last.addEventListener('keypress', (event) => {
+    letras(event, last)
+})
 
-    else{
-        btn.setAttribute("disabled", "true")
-        nombre.classList.remove("sucess")
-        nombre.classList.add("no_send")
-    }
-
-    if(letras_r.test(last.value)){
-        btn.removeAttribute("disabled"); 
-        last.classList.remove("no_send")
-        last.classList.add("sucess")
-    }
-
-    else if(last.value == ""){
-        btn.setAttribute("disabled", "true")
-        last.classList.remove("no_send")
-        last.classList.remove("sucess")
-    }
-
-    else{
-        btn.setAttribute("disabled", "true")
-        last.classList.remove("sucess")
-        last.classList.add("no_send")
-    }
-
-    if(numeros.test(doc.value)){
-        btn.removeAttribute("disabled");
-        doc.classList.remove("no_send")
-        doc.classList.add("sucess")
-    }
-
-    else if(doc.value == ""){
-        btn.setAttribute("disabled", "true")
-        doc.classList.remove("no_send")
-        doc.classList.remove("sucess")
-    }
-
-    else{
-        btn.setAttribute("disabled", "true")
-        doc.classList.remove("sucess")
-        doc.classList.add("no_send")
-    }
-
-    if(email.test(mail.value)){
-        btn.removeAttribute("disabled"); 
-        mail.classList.remove("no_send")
-        mail.classList.add("sucess")
-    }
-
-    else if(mail.value == ""){
-        btn.setAttribute("disabled", "true")
-        mail.classList.remove("no_send")
-        mail.classList.remove("sucess")
-    }
-
-    else{
-        btn.setAttribute("disabled", "true")
-        mail.classList.remove("sucess")
-        mail.classList.add("no_send")
-    }
+last.addEventListener('blur', (event) => {
+    letras(event, last)
 })
 
 
-console.log(nombre.value)
+mail.addEventListener("keyup", (event) => {
+    ema_il(event, mail)
+})
+
+mail.addEventListener("change", (event) => {
+    ema_il(event, mail)
+})
+
+
+doc.addEventListener('keyup', (event)=>{
+    num(event, doc)
+})
+
+doc.addEventListener('blur', (event)=>{
+    num(event, doc)
+})
+
+tipo_d.addEventListener('blur', (event) => {
+    seleccion(event, tipo_d)
+})
+tipo_d.addEventListener('click', (event) => {
+    seleccion(event, tipo_d)
+})
+
+let cambia = (event) => {
+    if(check.checked){
+        btn.removeAttribute("disabled")
+        btn.classList.add("btn")
+        btn.classList.remove("disabled")
+    }
+    else{
+        btn.classList.add("disabled")
+        btn.classList.remove("btn")
+        btn.setAttribute("disabled", "true")
+    }
+}
+
+check.addEventListener("change", (event) => {
+    cambia(event, check)
+})
+
+direccion.addEventListener('keyup', (event) => {
+    direc(event, direccion)
+})
+
 
 const form_v = (event) =>{
-    const datos = {
-        "nombre": nombre.value,
-        "apellido": last.value,
-        "documento": doc.value,
-        "tipo_doc": tipo_d.value,
-        "correo": mail.value,
-        "direccion": direccion.value
-    }
+    if(vacio()){
+        event.preventDefault();
+        alert("Ingrese todos los campos")
+        inputs.forEach((x)=>{
+            if(x.classList.contains( 'sucess' )){
+                
+            }
+            else{
+                x.classList.add("no_send")
+            }
 
-    event.preventDefault();
-    fetch('http://localhost:3000/users', {
-        method: "POST",
-        body: JSON.stringify(datos),
-        headers: {"Content-type": "application/json;charset=UTF-8"}
-      })
-      .then(response => response.json()) 
-      .then(json => alert("Registrado con exito", console.log(json)))
-      .catch(err => {
-        console.log("error", err)
-        alert("No se registro")
-      });
-    form.reset()
-    btn.setAttribute("disabled", "true")
-    let inputs = document.querySelectorAll("input")
-    inputs.forEach(x => {
-        x.classList.remove("sucess")
-    })
+            if(!select.classList.contains('sucess')){
+                select.classList.add('no_send')   
+            }
+
+            if(x.classList.contains('no_send')){
+                form.event.preventDefault();
+            }
+            
+        })        
+    }
+    else{
+        console.log(event)
+        const datos = {
+            "nombre": nombre.value,
+            "apellido": last.value,
+            "documento": doc.value,
+            "tipo_doc": tipo_d.value,
+            "correo": mail.value,
+            "direccion": direccion.value
+        }
+        fetch('http://localhost:3000/users', {
+            method: "POST",
+            body: JSON.stringify(datos),
+            headers: {"Content-type": "application/json;charset=UTF-8"}
+          })
+          .then(response => response.json()) 
+          .then(json => alert("Registrado con exito", console.log(json)))
+          .catch(err => {
+            console.log("error", err)
+            alert("No se registro")
+          });
+        
+        form.reset()
+        btn.setAttribute("disabled", "true")
+        let inputs = document.querySelectorAll("input")
+        inputs.forEach(x => {
+            x.classList.remove("sucess")
+        })
+    }
 }
 
 form.addEventListener('submit', form_v)
+
+//regex
+    
+    //regex del email https://w3.unpocodetodo.info/utiles/regex-ejemplos.php?type=email
+    
+//

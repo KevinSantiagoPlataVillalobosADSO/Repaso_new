@@ -12,22 +12,43 @@
             <figure class="card__login">
                 <form action="">
                     <h2>FORMULARIO</h2>
-                    <input type="text" placeholder="Nombre" class="name" required>
-                    <input type="text" placeholder="Apellido" class="lastname" required>
-                    <input type="number" placeholder="Documento" class="doc" required>
-                    <select name="" id="" aria-valuetext="" class="select_doc" required>
+                    <input type="text" placeholder="Nombre" class="name" >
+                    <input type="text" placeholder="Apellido" class="lastname" >
+                    <select name="" id="" aria-valuetext="" class="select_doc" >
                         <option>Seleccionar</option>
                     </select>
-                    <input type="email" name="" id="" placeholder="E-mail" class="email" required>
-                    <input type="text" placeholder="Direccion" class="direc" required>
+                    <input type="number" placeholder="Documento" class="doc" >
+                    <input type="text" name="" id="" placeholder="E-mail" class="email" >
+                    <input type="text" placeholder="Direccion" class="direc" >
+                    <div class="content__priv">
+                        <input type="checkbox" class="check">
+                        <p>Acepta las politicas</p>
+                    </div>
                     <button type="submit" class="btn hover">Enviar</button>
                 </form>
             </figure>
         </div>
         <div class="contenedor__lista">
-            
+            <h2>LISTA</h2>
+            <div class="content_table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nombre</td>
+                            <th>Apellido</td>
+                            <th>Documento</td>
+                            <th>correo</td>
+                            <th>Direccion</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                         
+                    </tbody>
+                    
+                </table>
+            </div>
         </div>
     </main>
-    <script src="app.js"></script>
+    <script type="module" src="app.js"></script>
 </body>
 </html>

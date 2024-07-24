@@ -2,7 +2,6 @@
 
 *{
     font-family: "Roboto", sans-serif;
-    padding: 0;
     margin: 0;
     box-sizing: border-box;
     transition: 1s;
@@ -21,7 +20,7 @@ body{
     box-shadow: 0px 0px 5px 3px rgba(93, 148, 211, 0.173);
     border-radius: 5vh;  
     width: 40vh;
-    height: 60vh;
+    height: 62vh;
 }
 
 .card__login{
@@ -74,7 +73,7 @@ select{
 
 form > input:hover{
     scale: 1.05;
-    background-color: rgb(67, 164, 255);
+    background-color: rgb(152, 205, 255);
     color: white;
 }
 
@@ -84,7 +83,7 @@ form > input:hover::placeholder {
 
 select:hover{
     scale: 1.05;
-    background-color: rgb(67, 164, 255);
+    background-color: rgb(152, 205, 255);
     color: white;
 }
 
@@ -95,14 +94,6 @@ select:hover::placeholder {
 option{
     background-color: rgb(239, 239, 239);
     color: black;
-}
-
-.sucess{
-    border: solid 1px green;
-}
-
-.no_send{
-    border: solid 1px red;
 }
 
 .btn{
@@ -119,6 +110,11 @@ option{
     font-size: 1.8vh;
 }
 
+.btn:hover{
+    scale: 1.1;
+    font-size: 2vh;
+}
+
 .content{
     display: flex;
     
@@ -126,8 +122,96 @@ option{
 
 .contenedor__lista{
     margin-left: 160px;
-    background-color: rgb(255, 255, 255);
     border-radius: 5vh;  
     width: 80vh;
     height: 60vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 3vh;
+}
+
+.contenedor__lista > h2{
+    padding: 2vh;
+    text-align: center;
+    width: 100%;
+    color: rgb(77, 172, 255);
+    border-bottom: 0.3vh solid rgba(53, 134, 226, 0.712);
+}
+
+.content__priv{
+    width: 30vh;
+    display: flex;
+    align-items: center;
+    
+}
+
+.content__priv > p{
+    margin-left: 1vh;
+}
+
+.sucess{
+    border: solid 1px green;
+}
+
+.no_send{
+    border: solid 1px red;
+}
+
+.disabled{
+    color: rgb(31, 31, 31);
+    padding: 1vh;
+    border-radius: 1vh;
+    background-color: rgb(203, 204, 207);
+    outline: none;
+    border: none;
+    margin: 1vh;
+    width: 30vh;
+    height: 5vh;
+    font-size: 1.8vh;
+}
+
+.content_table{
+    width: 100%;
+    max-height: 100%;
+    overflow-y: scroll;
+    
+}
+
+table {
+    overflow-y: scroll;
+    width: 95%;
+    height: 20vh;
+    margin: 50px auto;
+    border-collapse: collapse;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+    background-color: #f3f3f3;
+    border-radius: 2vh;
+    box-shadow: 0px 0px 5px 3px rgba(93, 148, 211, 0.173);
+}
+
+thead {
+    background-color: rgb(71, 138, 255);
+    color: #ffffff;
+    height: 5vh;
+    padding: 5vh;
+}
+
+thead :first-child {
+    border-top-left-radius: 2vh;
+}
+
+thead :last-child{
+    border-top-right-radius: 2vh;
+}
+
+thead th {
+    font-size: 1.5vh;
+    padding: 1.5vh;
+    text-align: left;
+}
+
+tbody td {  
+    font-size: 1.5vh;
+    padding: 1.5vh;
 }
