@@ -4,7 +4,10 @@ import num from './MODULO/number.js'
 import ema_il from './MODULO/email.js'
 import seleccion from './MODULO/seleccion.js'
 import direc from './MODULO/direc.js'
-import vacio from './MODULO/validar.js'
+import val from './MODULO/validar.js'
+import sel from './MODULO/solicitud.js'
+import listar from './MODULO/mostrar_tabla.js'
+import vaciar from './MODULO/vaciar.js'
 
 let btn = document.querySelector(".btn")
 let form = document.querySelector("form")
@@ -17,33 +20,40 @@ let direccion = document.querySelector(".direc")
 let check = document.querySelector(".check")
 let inputs = document.querySelectorAll("input")
 let select = document.querySelector("select")
+let tabla = document.querySelector("table")
 
-leer()
+addEventListener("DOMContentLoaded", (event) => {
+    let user = leer().then((u) => {
+        listar(u);
+    })
+})
 
-async function option(){
-    let response = await fetch("http://localhost:3000/documentos")
-    let data = await response.json();
-    console.log(data)
-    const select = document.querySelector("select")
-    const fragment = document.createDocumentFragment();
-    data.forEach( x => {
-        let option = document.createElement("option")
-        option.textContent = x.nombre;
-        fragment.appendChild(option)
-    });
-    select.appendChild(fragment)
-}
+addEventListener("DOMContentLoaded", (event) => {
+    sel().then((d) => {
+        const fragment = document.createDocumentFragment();
+        d.forEach( x => {
+            let option = document.createElement("option")
+            option.setAttribute("value", `${x.id}`)
+            option.textContent = x.nombre;
+            fragment.appendChild(option)
+        });
+        select.appendChild(fragment)
+    })
+    
+})
+
 
 if(check.checked){
     btn.classList.add("btn")
     btn.classList.remove("disabled")
 }
+
 else{
     btn.classList.add("disabled")
     btn.classList.remove("btn")
     btn.setAttribute("disabled", "true")
 }
-option();
+
 
 nombre.addEventListener('keyup', (event) => {
     letras(event, nombre)
@@ -68,7 +78,6 @@ last.addEventListener('blur', (event) => {
     letras(event, last)
 })
 
-
 mail.addEventListener("keyup", (event) => {
     ema_il(event, mail)
 })
@@ -79,6 +88,10 @@ mail.addEventListener("change", (event) => {
 
 
 doc.addEventListener('keyup', (event)=>{
+    num(event, doc)
+})
+
+doc.addEventListener('keypress', (event)=>{
     num(event, doc)
 })
 
@@ -114,31 +127,9 @@ direccion.addEventListener('keyup', (event) => {
     direc(event, direccion)
 })
 
-
-const form_v = (event) =>{
-    if(vacio()){
-        event.preventDefault();
-        alert("Ingrese todos los campos")
-        inputs.forEach((x)=>{
-            if(x.classList.contains( 'sucess' )){
-                
-            }
-            else{
-                x.classList.add("no_send")
-            }
-
-            if(!select.classList.contains('sucess')){
-                select.classList.add('no_send')   
-            }
-
-            if(x.classList.contains('no_send')){
-                form.event.preventDefault();
-            }
-            
-        })        
-    }
-    else{
-        console.log(event)
+form.addEventListener('submit', (event)=>{
+    let validate = val(event, "form [required]");    
+    if(validate){
         const datos = {
             "nombre": nombre.value,
             "apellido": last.value,
@@ -148,27 +139,43 @@ const form_v = (event) =>{
             "direccion": direccion.value
         }
         fetch('http://localhost:3000/users', {
-            method: "POST",
-            body: JSON.stringify(datos),
-            headers: {"Content-type": "application/json;charset=UTF-8"}
-          })
-          .then(response => response.json()) 
-          .then(json => alert("Registrado con exito", console.log(json)))
-          .catch(err => {
-            console.log("error", err)
-            alert("No se registro")
-          });
-        
-        form.reset()
-        btn.setAttribute("disabled", "true")
-        let inputs = document.querySelectorAll("input")
-        inputs.forEach(x => {
-            x.classList.remove("sucess")
+                method: "POST",
+                body: JSON.stringify(datos),
+                headers: {"Content-type": "application/json;charset=UTF-8"}
+              })
+              .then(response => response.json()) 
+              .then(json => {});
+            btn.setAttribute("disabled", "true")
+            let inputs = document.querySelectorAll("input")
+            inputs.forEach(x => {
+                x.classList.remove("sucess")
         })
+        let user = leer().then((u) => {
+            listar(u);
+        })
+        vaciar(event);
     }
-}
+})
 
-form.addEventListener('submit', form_v)
+tabla.addEventListener("click", (event) => {
+    if(event.target.classList.contains("btn_del")){
+    }
+    const row = event.target.closest("tr")
+    let id = row.querySelector(".id").innerText;
+    form_d(event, id)
+    
+})
+
+const form_d = (event, id)=>{
+    fetch(`http://localhost:3000/users/${id}`, {
+        method: 'DELETE',
+      }).then((d) => {
+        let user = leer().then((u) => {
+            listar(u);
+        })
+      })
+    
+}
 
 //regex
     

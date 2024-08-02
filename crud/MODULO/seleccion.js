@@ -13,7 +13,6 @@ export default seleccion
 // }
 
 function seleccion(event, element){
-    console.log(element.value)
     if(element.value == "Seleccionar"){
         element.classList.remove("sucess")
         element.classList.add("no_send")

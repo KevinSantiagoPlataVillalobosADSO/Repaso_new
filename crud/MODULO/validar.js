@@ -1,19 +1,23 @@
-export default vacio
+export default val
 
-let nombre = document.querySelector(".name")
-let last = document.querySelector(".lastname")
-let doc = document.querySelector(".doc")
-let mail = document.querySelector(".email")
 let tipo_d = document.querySelector(".select_doc")
-let direccion = document.querySelector(".direc")
 
 
-function vacio(){
-    if(nombre.value == "" || last.value == "" || doc.value == "" || tipo_d == "Seleccionar" || mail.value == "" || direccion.value == ""){
-        return true
-    }
-    
-    else{
-        return false
-    }
+function val(event, form){
+    event.preventDefault();
+    let inpus_r = document.querySelectorAll(form)
+    let pasar = true
+    inpus_r.forEach((x) => {
+        if(x.value == "" || x.classList.contains("no_send")){
+            if(tipo_d.value == "Seleccionar"){
+                tipo_d.classList.add("no_send")
+            }
+            x.classList.add("no_send")
+            pasar = false
+        }
+    })
+    return pasar
 }
+
+
+
